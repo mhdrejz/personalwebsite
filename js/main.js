@@ -188,29 +188,32 @@ function validateMsg() {
     return true;
 }
 
+
 function validateForm() {
-    if (!validateName() || !validateEmail() || !validateMsg() || !validateSubject()) {
+    if (!validateName() || !validateEmail() || !validateMsg() || !validateSub()) {
         return false;
     }
-    //Submission
-    $("#submit-form").submit((e) => {
-        e.preventDefault()
-        $.ajax({
-            url: "https://script.google.com/macros/s/AKfycbzKSZdiuyvEQTR_qsZAF-oMIfgZl_WqOXKKdxNjA0tRK0UJNXdbB8j6wFAwqJWhFp1t/exec",
-            data: $("#submit-form").serialize(),
-            method: "post",
-            success: function (response) {
-                alert("Form submitted successfully")
-                window.location.reload()
-                //window.location.href="https://google.com"
-            },
-            error: function (err) {
-                alert("Something Error")
-
-            }
-        })
-    })
     return true
-
 }
+
+//Submission
+$("#submit-form").submit((e) => {
+    if(validateForm()){
+    e.preventDefault()
+    $.ajax({
+        url: "https://script.google.com/macros/s/AKfycbzKSZdiuyvEQTR_qsZAF-oMIfgZl_WqOXKKdxNjA0tRK0UJNXdbB8j6wFAwqJWhFp1t/exec",
+        data: $("#submit-form").serialize(),
+        method: "post",
+        success: function (response) {
+            alert("Form submitted successfully")
+            window.location.reload()
+            //window.location.href="https://google.com"
+        },
+        error: function (err) {
+            alert("Something Error")
+
+        }
+    })
+}
+})
 
